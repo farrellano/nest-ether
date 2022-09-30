@@ -1,12 +1,27 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('fascoin')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('symbol')
+  async getSymbol(): Promise<string> {
+    return this.appService.getSymbol();
+  }
+
+  @Get('name')
+  async getName(): Promise<string> {
+    return this.appService.getName();
+  }
+
+  @Get('owner')
+  async getOwner(): Promise<string> {
+    return this.appService.getOwner();
+  }
+
+  @Post('send')
+  async sendTx(): Promise<string> {
+    return this.appService.sendTransfer();
   }
 }
